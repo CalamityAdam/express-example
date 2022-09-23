@@ -1,8 +1,17 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
 
+// Allow CORS requests
 app.use(cors());
+
+// parsing middleware for form input data & json
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// api router
+app.use('/api', require('./routes'));
 
 app.get('/', (req, res, next) => {
   res.send('Stay awhile and listen!');
